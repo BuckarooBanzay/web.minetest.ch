@@ -1,0 +1,17 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    compose_directory: /data/web.minetest.ch
+  tasks:
+    - name: Copy files
+      synchronize:
+        src: ./
+        dest: "{{ compose_directory }}/"
+
+    - name: Create and start services
+      community.general.docker_compose:
+        project_src: "{{ compose_directory }}"
+        pull: yes
+        build: yes
+        remove_orphans: yes

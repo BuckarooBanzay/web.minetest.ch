@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+ mtweb:
+  image: ghcr.io/buckaroobanzay/minetest-web:latest
+  restart: always
+  networks:
+   - terminator
+   - default
+  restart: always
+  labels:
+    - "traefik.enable=true"
+    - "traefik.docker.network=terminator"
+    - "traefik.http.routers.web-minetest-ch.rule=Host(`web.minetest.ch`)"
+    - "traefik.http.services.web-minetest-ch.loadbalancer.server.port=8080"
+    - "traefik.http.routers.web-minetest-ch.entrypoints=websecure"
+    - "traefik.http.routers.web-minetest-ch.tls.certresolver=default"
+
+networks:
+ terminator:
+  external: true
