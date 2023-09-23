@@ -2,7 +2,7 @@ version: "2"
 
 services:
  mtweb:
-  image: ghcr.io/buckaroobanzay/minetest-web:latest
+  image: ghcr.io/buckaroobanzay/minetest-web:v1.1
   restart: always
   networks:
    - terminator
